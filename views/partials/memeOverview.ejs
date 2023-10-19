@@ -1,0 +1,31 @@
+<section class="container">
+  <form class="form-inline my-2 my-lg-0" action="/search-memes" method="get"> <!-- Updated action attribute -->
+    <input class="form-control mr-sm-2 mb-2" type="text" id="searchInput" name="q" placeholder="Search Memes" style="width: 150px;" aria-label="Search">
+    <button class="btn btn-success my-2 my-sm-0" type="submit" id="searchButton">Search</button> <!-- Updated type to "submit" -->
+  </form>
+  <table class="memes-table" id="table">
+    <thead>
+      <tr>
+        <th scope="col">Meme</th>
+        <th scope="col">Name</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% memes.forEach(meme => { %>
+        <tr data-row-id="<%= meme.id %>" class="memes-row">
+          <td class="image-td">
+            <img src="<%= meme.url %>" alt="<%= meme.name %>" style="width: 20%;">
+          </td>
+          <td><%= meme.name %></td>
+          <% if (user) { %>
+            <td>
+              <button class="btn btn-primary details-button" type="button" data-meme-id="<%= meme.id %>"
+                onclick="highlightRow(this); location.href='/meme/<%= meme.id %>'">Details</button>
+            </td>
+          <% } %>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</section>
